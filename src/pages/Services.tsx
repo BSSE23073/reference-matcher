@@ -3,6 +3,9 @@ import { Phone, Wifi, Tv, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ServiceCard } from "@/components/services/ServiceCard";
 import { motion } from "framer-motion";
+import fiberInternet from "@/assets/fiber-internet.jpg";
+import tvEntertainment from "@/assets/tv-entertainment.jpg";
+import bundlePackage from "@/assets/bundle-package.jpg";
 
 const PHONE_NUMBER = "(515) 305-4012";
 const PHONE_LINK = "tel:+15153054012";
@@ -269,14 +272,23 @@ const Services = () => {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex items-center gap-4 mb-10"
+            className="grid lg:grid-cols-2 gap-12 items-center mb-12"
           >
-            <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-              <Wifi className="h-7 w-7 text-primary-foreground" />
+            <div className="flex items-center gap-4">
+              <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                <Wifi className="h-7 w-7 text-primary-foreground" />
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold">Home Internet</h2>
+                <p className="text-muted-foreground">High-speed internet for every household</p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-3xl font-bold">Home Internet</h2>
-              <p className="text-muted-foreground">High-speed internet for every household</p>
+            <div className="hidden lg:block">
+              <img 
+                src={fiberInternet} 
+                alt="Fiber internet connection" 
+                className="w-full h-48 object-cover rounded-2xl shadow-lg"
+              />
             </div>
           </motion.div>
 
@@ -301,14 +313,23 @@ const Services = () => {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex items-center gap-4 mb-10"
+            className="grid lg:grid-cols-2 gap-12 items-center mb-12"
           >
-            <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-accent to-secondary flex items-center justify-center">
-              <Tv className="h-7 w-7 text-accent-foreground" />
+            <div className="hidden lg:block order-2 lg:order-1">
+              <img 
+                src={tvEntertainment} 
+                alt="TV entertainment" 
+                className="w-full h-48 object-cover rounded-2xl shadow-lg"
+              />
             </div>
-            <div>
-              <h2 className="text-3xl font-bold">Cable & TV Packages</h2>
-              <p className="text-muted-foreground">Entertainment for the whole family</p>
+            <div className="flex items-center gap-4 order-1 lg:order-2">
+              <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-accent to-secondary flex items-center justify-center">
+                <Tv className="h-7 w-7 text-accent-foreground" />
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold">Cable & TV Packages</h2>
+                <p className="text-muted-foreground">Entertainment for the whole family</p>
+              </div>
             </div>
           </motion.div>
 
@@ -333,14 +354,23 @@ const Services = () => {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex items-center gap-4 mb-10"
+            className="grid lg:grid-cols-2 gap-12 items-center mb-12"
           >
-            <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-secondary to-primary flex items-center justify-center">
-              <Package className="h-7 w-7 text-secondary-foreground" />
+            <div className="flex items-center gap-4">
+              <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-secondary to-primary flex items-center justify-center">
+                <Package className="h-7 w-7 text-secondary-foreground" />
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold">Internet + TV Bundles</h2>
+                <p className="text-muted-foreground">Save more when you bundle services</p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-3xl font-bold">Internet + TV Bundles</h2>
-              <p className="text-muted-foreground">Save more when you bundle services</p>
+            <div className="hidden lg:block">
+              <img 
+                src={bundlePackage} 
+                alt="Bundle package" 
+                className="w-full h-48 object-cover rounded-2xl shadow-lg"
+              />
             </div>
           </motion.div>
 
