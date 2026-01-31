@@ -3,6 +3,7 @@ import { Phone, Mail, MapPin, Users, Target, Award, Heart, Zap } from "lucide-re
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import aboutTeam from "@/assets/about-team.jpg";
 
 const PHONE_NUMBER = "(515) 305-4012";
 const PHONE_LINK = "tel:+15153054012";
@@ -103,23 +104,35 @@ const About = () => {
       {/* About Content */}
       <section className="py-16 md:py-24">
         <div className="container">
-          <div className="max-w-4xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Image */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
+              className="relative"
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Who We Are</h2>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img 
+                  src={aboutTeam} 
+                  alt="Our team" 
+                  className="w-full h-[400px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
+              </div>
+              {/* Decorative element */}
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-primary/10 rounded-2xl -z-10" />
+              <div className="absolute -top-6 -left-6 w-24 h-24 bg-accent/10 rounded-2xl -z-10" />
             </motion.div>
-            
+
+            {/* Content */}
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="prose prose-lg max-w-none text-center space-y-6"
+              className="space-y-6"
             >
+              <h2 className="text-3xl md:text-4xl font-bold">Who We Are</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 Internet Network is an <strong className="text-foreground">independent marketing partner</strong> dedicated to helping 
                 households and businesses find the best internet and television services available in their area.
