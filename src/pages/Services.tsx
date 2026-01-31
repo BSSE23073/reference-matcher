@@ -1,7 +1,8 @@
 import { Layout } from "@/components/layout/Layout";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Phone, Wifi, Tv, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Phone, Check, Wifi, Tv, Package } from "lucide-react";
+import { ServiceCard } from "@/components/services/ServiceCard";
+import { motion } from "framer-motion";
 
 const PHONE_NUMBER = "(515) 305-4012";
 const PHONE_LINK = "tel:+15153054012";
@@ -10,27 +11,74 @@ const internetPlans = [
   {
     name: "Basic Internet",
     price: "$39.99",
-    speed: "Up to 100 Mbps",
-    features: ["Great for browsing & email", "Connect up to 5 devices", "Standard WiFi router included"],
+    description: "Up to 100 Mbps",
+    features: [
+      "Great for browsing & email",
+      "Connect up to 5 devices",
+      "Standard WiFi router included",
+      "Perfect for small households",
+    ],
+    details: [
+      "24/7 Technical Support",
+      "No annual contract required",
+      "Self-installation option available",
+      "30-day satisfaction guarantee",
+    ],
   },
   {
     name: "Plus Internet",
     price: "$59.99",
-    speed: "Up to 300 Mbps",
-    features: ["Perfect for streaming", "Connect up to 10 devices", "Enhanced WiFi router included", "No data caps"],
+    description: "Up to 300 Mbps",
+    features: [
+      "Perfect for streaming",
+      "Connect up to 10 devices",
+      "Enhanced WiFi router included",
+      "No data caps",
+      "Great for work from home",
+    ],
+    details: [
+      "Priority customer support",
+      "Free professional installation",
+      "WiFi network optimization",
+      "Parental controls included",
+    ],
     popular: true,
   },
   {
     name: "Premium Internet",
     price: "$79.99",
-    speed: "Up to 500 Mbps",
-    features: ["Ideal for gaming & 4K streaming", "Unlimited device connections", "Premium WiFi 6 router", "No data caps", "Priority support"],
+    description: "Up to 500 Mbps",
+    features: [
+      "Ideal for gaming & 4K streaming",
+      "Unlimited device connections",
+      "Premium WiFi 6 router",
+      "No data caps",
+      "Priority support",
+    ],
+    details: [
+      "Dedicated support line",
+      "Advanced security suite",
+      "Guest network capability",
+      "Speed guarantee or credit",
+    ],
   },
   {
     name: "Ultra Internet",
     price: "$119.99",
-    speed: "Up to 1 Gbps",
-    features: ["Best for power users", "Whole-home mesh WiFi", "Unlimited everything", "Dedicated support line", "Professional installation"],
+    description: "Up to 1 Gbps",
+    features: [
+      "Best for power users",
+      "Whole-home mesh WiFi",
+      "Unlimited everything",
+      "Dedicated support line",
+      "Professional installation",
+    ],
+    details: [
+      "Premium mesh WiFi system included",
+      "White-glove installation service",
+      "Direct technician support line",
+      "Business-class reliability",
+    ],
   },
 ];
 
@@ -38,27 +86,74 @@ const tvPackages = [
   {
     name: "Local Channels",
     price: "$30.00",
-    channels: "30+ channels",
-    features: ["Local broadcast networks", "Basic cable channels", "Cloud DVR (50 hours)"],
+    description: "30+ channels",
+    features: [
+      "Local broadcast networks",
+      "Basic cable channels",
+      "Cloud DVR (50 hours)",
+      "Watch on any device",
+    ],
+    details: [
+      "ABC, NBC, CBS, FOX included",
+      "On-demand content library",
+      "Restart live TV feature",
+      "7-day catch-up available",
+    ],
   },
   {
     name: "Entertainment",
     price: "$79.99",
-    channels: "125+ channels",
-    features: ["All local channels", "Popular entertainment networks", "Sports channels", "Cloud DVR (100 hours)"],
+    description: "125+ channels",
+    features: [
+      "All local channels",
+      "Popular entertainment networks",
+      "Sports channels",
+      "Cloud DVR (100 hours)",
+      "3 simultaneous streams",
+    ],
+    details: [
+      "ESPN, TNT, TBS, USA included",
+      "Premium on-demand library",
+      "Downloadable content",
+      "Multi-device support",
+    ],
     popular: true,
   },
   {
     name: "Premium",
     price: "$149.99",
-    channels: "200+ channels",
-    features: ["All entertainment channels", "Premium movie channels", "International channels", "Cloud DVR (250 hours)"],
+    description: "200+ channels",
+    features: [
+      "All entertainment channels",
+      "Premium movie channels",
+      "International channels",
+      "Cloud DVR (250 hours)",
+      "4K content access",
+    ],
+    details: [
+      "HBO, Showtime, Starz included",
+      "Latest movie releases",
+      "Exclusive original content",
+      "Advanced recording features",
+    ],
   },
   {
     name: "Ultimate",
     price: "$199.99",
-    channels: "300+ channels",
-    features: ["Every channel available", "All premium networks", "Unlimited DVR storage", "4 simultaneous streams"],
+    description: "300+ channels",
+    features: [
+      "Every channel available",
+      "All premium networks",
+      "Unlimited DVR storage",
+      "4 simultaneous streams",
+      "Premium sports packages",
+    ],
+    details: [
+      "NFL Sunday Ticket eligible",
+      "4K HDR content",
+      "Priority streaming",
+      "Family account sharing",
+    ],
   },
 ];
 
@@ -66,177 +161,207 @@ const bundles = [
   {
     name: "Starter Bundle",
     price: "$69.99",
-    features: ["Basic Internet (100 Mbps)", "Local Channels (30+)", "Standard equipment"],
+    description: "Internet + Local TV",
+    features: [
+      "Basic Internet (100 Mbps)",
+      "Local Channels (30+)",
+      "Standard equipment",
+      "Save vs. separate plans",
+    ],
+    details: [
+      "Simple setup process",
+      "Single bill for all services",
+      "Bundle discount applied",
+      "Upgrade anytime",
+    ],
   },
   {
     name: "Family Bundle",
     price: "$119.99",
-    features: ["Plus Internet (300 Mbps)", "Entertainment TV (125+ ch)", "WiFi 6 router", "Cloud DVR included"],
+    description: "Internet + Entertainment",
+    features: [
+      "Plus Internet (300 Mbps)",
+      "Entertainment TV (125+ ch)",
+      "WiFi 6 router",
+      "Cloud DVR included",
+      "Whole-home coverage",
+    ],
+    details: [
+      "Best value for families",
+      "Parental controls",
+      "Kids-safe streaming",
+      "Multi-room DVR access",
+    ],
     popular: true,
   },
   {
     name: "Premium Bundle",
     price: "$159.99",
-    features: ["Premium Internet (500 Mbps)", "Premium TV (200+ ch)", "Whole-home WiFi", "250 hours DVR"],
+    description: "Internet + Premium TV",
+    features: [
+      "Premium Internet (500 Mbps)",
+      "Premium TV (200+ ch)",
+      "Whole-home WiFi",
+      "250 hours DVR",
+      "4K streaming",
+    ],
+    details: [
+      "All premium channels",
+      "Latest equipment",
+      "Concierge support",
+      "Price lock guarantee",
+    ],
   },
   {
     name: "Ultimate Bundle",
     price: "$199.99",
-    features: ["Ultra Internet (1 Gbps)", "Ultimate TV (300+ ch)", "Mesh WiFi system", "Unlimited DVR", "Priority support"],
+    description: "The Complete Package",
+    features: [
+      "Ultra Internet (1 Gbps)",
+      "Ultimate TV (300+ ch)",
+      "Mesh WiFi system",
+      "Unlimited DVR",
+      "Priority support",
+    ],
+    details: [
+      "Best speeds + content",
+      "White-glove service",
+      "VIP support line",
+      "Future upgrade priority",
+    ],
   },
 ];
+
+const sectionVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+};
 
 const Services = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="hero-gradient text-primary-foreground py-16 md:py-20">
-        <div className="container text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Services & Plans</h1>
-          <p className="text-lg text-primary-foreground/90 max-w-2xl mx-auto">
-            Choose from our range of internet, TV, and bundle packages designed to fit every need and budget.
-          </p>
+      <section className="hero-gradient text-primary-foreground py-16 md:py-24">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-3xl mx-auto"
+          >
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+              Plans & Pricing
+            </h1>
+            <p className="text-lg md:text-xl text-primary-foreground/90">
+              Choose from our range of internet, TV, and bundle packages designed to fit every need and budget.
+            </p>
+          </motion.div>
         </div>
       </section>
 
       {/* Internet Plans */}
       <section id="internet" className="py-16 md:py-24">
         <div className="container">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
-              <Wifi className="h-6 w-6 text-primary" />
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-4 mb-10"
+          >
+            <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+              <Wifi className="h-7 w-7 text-primary-foreground" />
             </div>
             <div>
               <h2 className="text-3xl font-bold">Home Internet</h2>
               <p className="text-muted-foreground">High-speed internet for every household</p>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {internetPlans.map((plan) => (
-              <Card key={plan.name} className={`relative ${plan.popular ? 'border-primary shadow-lg' : ''}`}>
-                {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                    Most Popular
-                  </div>
-                )}
-                <CardHeader>
-                  <CardTitle>{plan.name}</CardTitle>
-                  <CardDescription>{plan.speed}</CardDescription>
-                  <div className="text-3xl font-bold text-primary">{plan.price}<span className="text-sm font-normal text-muted-foreground">/mo</span></div>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-2 text-sm">
-                        <Check className="h-4 w-4 text-accent mt-0.5 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button asChild className="w-full mt-6">
-                    <a href={PHONE_LINK}>Get Started</a>
-                  </Button>
-                </CardContent>
-              </Card>
+          <motion.div
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"
+          >
+            {internetPlans.map((plan, index) => (
+              <ServiceCard key={plan.name} {...plan} index={index} />
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* TV Packages */}
       <section id="tv" className="py-16 md:py-24 section-alt">
         <div className="container">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
-              <Tv className="h-6 w-6 text-primary" />
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-4 mb-10"
+          >
+            <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-accent to-secondary flex items-center justify-center">
+              <Tv className="h-7 w-7 text-accent-foreground" />
             </div>
             <div>
               <h2 className="text-3xl font-bold">Cable & TV Packages</h2>
               <p className="text-muted-foreground">Entertainment for the whole family</p>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {tvPackages.map((plan) => (
-              <Card key={plan.name} className={`relative bg-card ${plan.popular ? 'border-primary shadow-lg' : ''}`}>
-                {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                    Most Popular
-                  </div>
-                )}
-                <CardHeader>
-                  <CardTitle>{plan.name}</CardTitle>
-                  <CardDescription>{plan.channels}</CardDescription>
-                  <div className="text-3xl font-bold text-primary">{plan.price}<span className="text-sm font-normal text-muted-foreground">/mo</span></div>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-2 text-sm">
-                        <Check className="h-4 w-4 text-accent mt-0.5 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button asChild className="w-full mt-6">
-                    <a href={PHONE_LINK}>Get Started</a>
-                  </Button>
-                </CardContent>
-              </Card>
+          <motion.div
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"
+          >
+            {tvPackages.map((plan, index) => (
+              <ServiceCard key={plan.name} {...plan} index={index} />
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Bundles */}
       <section id="bundles" className="py-16 md:py-24">
         <div className="container">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
-              <Package className="h-6 w-6 text-primary" />
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-4 mb-10"
+          >
+            <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-secondary to-primary flex items-center justify-center">
+              <Package className="h-7 w-7 text-secondary-foreground" />
             </div>
             <div>
               <h2 className="text-3xl font-bold">Internet + TV Bundles</h2>
               <p className="text-muted-foreground">Save more when you bundle services</p>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {bundles.map((plan) => (
-              <Card key={plan.name} className={`relative ${plan.popular ? 'border-primary shadow-lg' : ''}`}>
-                {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                    Best Value
-                  </div>
-                )}
-                <CardHeader>
-                  <CardTitle>{plan.name}</CardTitle>
-                  <div className="text-3xl font-bold text-primary">{plan.price}<span className="text-sm font-normal text-muted-foreground">/mo</span></div>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-2 text-sm">
-                        <Check className="h-4 w-4 text-accent mt-0.5 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button asChild className="w-full mt-6">
-                    <a href={PHONE_LINK}>Get Started</a>
-                  </Button>
-                </CardContent>
-              </Card>
+          <motion.div
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"
+          >
+            {bundles.map((plan, index) => (
+              <ServiceCard key={plan.name} {...plan} index={index} />
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Disclaimer */}
       <section className="py-8 border-t">
         <div className="container">
-          <p className="text-sm text-muted-foreground text-center">
+          <p className="text-sm text-muted-foreground text-center max-w-3xl mx-auto">
             * Prices shown are starting prices and may vary based on location and availability. 
             Equipment fees, taxes, and other charges may apply. Contact us for complete pricing details.
           </p>
@@ -244,16 +369,25 @@ const Services = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 hero-gradient text-primary-foreground">
-        <div className="container text-center">
-          <h2 className="text-3xl font-bold mb-4">Not Sure Which Plan is Right for You?</h2>
-          <p className="text-lg mb-8 text-primary-foreground/90">Call our experts and we'll help you find the perfect solution.</p>
-          <Button asChild size="lg" variant="secondary" className="gap-2">
-            <a href={PHONE_LINK}>
-              <Phone className="h-5 w-5" />
-              Call {PHONE_NUMBER}
-            </a>
-          </Button>
+      <section className="py-16 md:py-20 hero-gradient text-primary-foreground">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Not Sure Which Plan is Right for You?</h2>
+            <p className="text-lg mb-8 text-primary-foreground/90 max-w-2xl mx-auto">
+              Call our experts and we'll help you find the perfect solution for your needs and budget.
+            </p>
+            <Button asChild size="lg" className="gap-2 bg-white text-primary hover:bg-white/90 shadow-lg">
+              <a href={PHONE_LINK}>
+                <Phone className="h-5 w-5" />
+                Call {PHONE_NUMBER}
+              </a>
+            </Button>
+          </motion.div>
         </div>
       </section>
     </Layout>
