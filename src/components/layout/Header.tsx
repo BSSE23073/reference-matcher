@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
@@ -67,7 +66,6 @@ export function Header() {
 
         {/* Desktop Actions */}
         <div className="hidden lg:flex items-center gap-3">
-          <ThemeToggle />
           <Button asChild size="lg" className="gap-2 bg-primary hover:bg-primary/90 text-white">
             <a href={PHONE_LINK}>
               <Phone className="h-4 w-4" />
@@ -78,7 +76,6 @@ export function Header() {
 
         {/* Mobile Actions */}
         <div className="flex lg:hidden items-center gap-2">
-          <ThemeToggle />
           <button
             className="p-2 rounded-md hover:bg-muted transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
