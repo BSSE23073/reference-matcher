@@ -1,7 +1,8 @@
 import { Layout } from "@/components/layout/Layout";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { Phone } from "lucide-react";
+import { Phone, HelpCircle } from "lucide-react";
+import { motion } from "framer-motion";
 
 const PHONE_NUMBER = "(515) 305-4012";
 const PHONE_LINK = "tel:+15153054012";
@@ -73,46 +74,85 @@ const FAQ = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="hero-gradient text-primary-foreground py-16 md:py-20">
-        <div className="container text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h1>
-          <p className="text-lg text-primary-foreground/90 max-w-2xl mx-auto">
-            Find answers to common questions about our services, plans, and process.
-          </p>
+      <section className="hero-gradient text-primary-foreground py-16 md:py-24 overflow-hidden relative">
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 -right-20 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 -left-20 w-80 h-80 bg-white/5 rounded-full blur-3xl" />
+        </div>
+        <div className="container relative">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-3xl mx-auto"
+          >
+            <motion.div 
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, type: "spring" }}
+              className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-white/10 backdrop-blur mb-6"
+            >
+              <HelpCircle className="h-8 w-8" />
+            </motion.div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Frequently Asked Questions</h1>
+            <p className="text-lg md:text-xl text-primary-foreground/90">
+              Find answers to common questions about our services, plans, and process.
+            </p>
+          </motion.div>
         </div>
       </section>
 
       {/* FAQ Accordion */}
       <section className="py-16 md:py-24">
         <div className="container max-w-3xl">
-          <Accordion type="single" collapsible className="w-full">
+          <Accordion type="single" collapsible className="w-full space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="text-left">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.03 }}
+              >
+                <AccordionItem 
+                  value={`item-${index}`} 
+                  className="bg-card border rounded-xl px-6 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <AccordionTrigger className="text-left hover:no-underline py-5">
+                    <span className="font-semibold pr-4">{faq.question}</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              </motion.div>
             ))}
           </Accordion>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-16 hero-gradient text-primary-foreground">
-        <div className="container text-center">
-          <h2 className="text-3xl font-bold mb-4">Still Have Questions?</h2>
-          <p className="text-lg mb-8 text-primary-foreground/90">
-            Our team is ready to help. Give us a call and we'll answer all your questions.
-          </p>
-          <Button asChild size="lg" variant="secondary" className="gap-2">
-            <a href={PHONE_LINK}>
-              <Phone className="h-5 w-5" />
-              Call {PHONE_NUMBER}
-            </a>
-          </Button>
+      <section className="py-16 md:py-20 hero-gradient text-primary-foreground">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Still Have Questions?</h2>
+            <p className="text-lg mb-8 text-primary-foreground/90 max-w-2xl mx-auto">
+              Our team is ready to help. Give us a call and we'll answer all your questions.
+            </p>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button asChild size="lg" className="gap-2 bg-white text-primary hover:bg-white/90 shadow-lg">
+                <a href={PHONE_LINK}>
+                  <Phone className="h-5 w-5" />
+                  Call {PHONE_NUMBER}
+                </a>
+              </Button>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </Layout>
