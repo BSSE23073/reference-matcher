@@ -1,6 +1,7 @@
-import { Phone, Shield, Clock, Users, CheckCircle, Sparkles } from "lucide-react";
+import { Phone, Shield, Clock, Users, CheckCircle, Sparkles, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-home.jpg";
 
 const PHONE_NUMBER = "1(515)-305-4012";
@@ -91,6 +92,17 @@ export function HeroSection() {
                 <Phone className="h-5 w-5" />
                 Call Now: {PHONE_NUMBER}
               </a>
+            </Button>
+            <Button 
+              asChild 
+              size="lg" 
+              variant="outline"
+              className="text-lg gap-2 px-8 py-7 border-white text-white hover:bg-white/10 transition-all"
+            >
+              <Link to="/services">
+                <FileText className="h-5 w-5" />
+                Check Availability
+              </Link>
             </Button>
           </motion.div>
 
