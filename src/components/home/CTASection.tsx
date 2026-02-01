@@ -43,13 +43,14 @@ export function CTASection() {
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            className="flex justify-center"
           >
             <Button 
               asChild 
               size="lg" 
               className="text-lg gap-3 px-10 py-7 bg-white text-primary hover:bg-white/90 shadow-2xl hover:shadow-white/25 transition-all group"
             >
-              <a href={PHONE_LINK}>
+              <a href={PHONE_LINK} className="flex items-center justify-center">
                 <Phone className="h-6 w-6" />
                 Call Now: {PHONE_NUMBER}
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
