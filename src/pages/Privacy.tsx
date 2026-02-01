@@ -82,7 +82,7 @@ const Privacy = () => {
             <p className="text-lg text-primary-foreground/80">
               Your privacy matters to us. Learn how we protect your information.
             </p>
-            <p className="text-sm text-primary-foreground/60 mt-4">Last updated: January 2025</p>
+            <p className="text-sm text-primary-foreground/60 mt-4">Last updated: January 2026</p>
           </motion.div>
         </div>
       </section>

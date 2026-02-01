@@ -76,7 +76,7 @@ const RefundPolicy = () => {
             <p className="text-lg text-primary-foreground/80">
               Understand our refund and cancellation guidelines
             </p>
-            <p className="text-sm text-primary-foreground/60 mt-4">Last updated: January 2025</p>
+            <p className="text-sm text-primary-foreground/60 mt-4">Last updated: January 2026</p>
           </motion.div>
         </div>
       </section>
