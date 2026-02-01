@@ -1,12 +1,6 @@
 import { Layout } from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { RotateCcw, Briefcase, Users, XCircle, CheckCircle, HeadphonesIcon, HelpCircle } from "lucide-react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
 
 const PHONE_NUMBER = "1(515)-305-4012";
@@ -93,41 +87,36 @@ const RefundPolicy = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
+            className="space-y-6"
           >
-            <Card className="border-0 shadow-lg">
-              <CardContent className="p-0">
-                <Accordion type="single" collapsible className="w-full">
-                  {refundContent.map((item, index) => (
-                    <motion.div key={item.id} variants={itemVariants}>
-                      <AccordionItem value={item.id} className="border-b last:border-0">
-                        <AccordionTrigger className="px-6 py-5 hover:no-underline hover:bg-muted/50 transition-colors">
-                          <div className="flex items-center gap-4 text-left">
-                            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary shrink-0">
-                              <item.icon className="h-5 w-5" />
-                            </div>
-                            <span className="font-semibold text-base">
-                              {index + 1}. {item.title}
-                            </span>
-                          </div>
-                        </AccordionTrigger>
-                        <AccordionContent className="px-6 pb-5">
-                          <div className="pl-14 text-muted-foreground leading-relaxed">
-                            {item.content}
-                          </div>
-                        </AccordionContent>
-                      </AccordionItem>
-                    </motion.div>
-                  ))}
-                </Accordion>
-              </CardContent>
-            </Card>
+            {refundContent.map((item, index) => (
+              <motion.div key={item.id} variants={itemVariants}>
+                <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <CardContent className="p-6 md:p-8">
+                    <div className="flex items-start gap-4">
+                      <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary shrink-0">
+                        <item.icon className="h-6 w-6" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-lg md:text-xl font-semibold mb-3 text-foreground">
+                          {index + 1}. {item.title}
+                        </h3>
+                        <p className="text-muted-foreground leading-relaxed">
+                          {item.content}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
-            className="mt-8 text-center text-sm text-muted-foreground"
+            className="mt-10 text-center text-sm text-muted-foreground"
           >
             <p>We're here to help you navigate any service-related concerns with your provider.</p>
           </motion.div>
