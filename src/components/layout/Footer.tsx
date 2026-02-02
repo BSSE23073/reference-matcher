@@ -38,7 +38,7 @@ export function Footer() {
               <img 
                 src={logo}
                 alt="Internet Network"
-                className="h-14 w-auto"
+                className="h-14 w-auto brightness-0 invert dark:brightness-100 dark:invert-0"
               />
             </Link>
             <p className="text-sm text-background/70">
