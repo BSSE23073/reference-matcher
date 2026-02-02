@@ -45,17 +45,17 @@ export function Footer() {
               Your trusted partner for high-speed internet and TV services. 
               Connecting homes and businesses across the nation.
             </p>
-            <div className="space-y-2">
-              <a href={PHONE_LINK} className="flex items-center gap-2 text-sm hover:text-primary transition-colors">
-                <Phone className="h-4 w-4" />
+            <div className="space-y-3">
+              <a href={PHONE_LINK} className="flex items-center gap-2 text-base font-medium hover:text-primary transition-colors">
+                <Phone className="h-5 w-5" />
                 {PHONE_NUMBER}
               </a>
-              <a href={`mailto:${EMAIL}`} className="flex items-center gap-2 text-sm hover:text-primary transition-colors">
-                <Mail className="h-4 w-4" />
+              <a href={`mailto:${EMAIL}`} className="flex items-center gap-2 text-base hover:text-primary transition-colors break-all">
+                <Mail className="h-5 w-5 flex-shrink-0" />
                 {EMAIL}
               </a>
-              <p className="flex items-center gap-2 text-sm text-background/70">
-                <MapPin className="h-4 w-4" />
+              <p className="flex items-start gap-2 text-base text-background/70">
+                <MapPin className="h-5 w-5 flex-shrink-0 mt-0.5" />
                 {ADDRESS}
               </p>
             </div>
