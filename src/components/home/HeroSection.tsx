@@ -1,4 +1,4 @@
-import { Phone, Shield, Clock, Users, CheckCircle, Sparkles, FileText } from "lucide-react";
+import { Phone, Shield, Clock, Users, CheckCircle, Sparkles, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -100,7 +100,7 @@ export function HeroSection() {
               className="text-lg gap-2 px-8 py-7 bg-white/10 border-white text-white hover:bg-white/20 transition-all"
             >
               <Link to="/services">
-                <FileText className="h-5 w-5" />
+                <Search className="h-5 w-5" />
                 Check Availability
               </Link>
             </Button>
