@@ -1,61 +1,83 @@
 
-# Plan: Store Contact Form Submissions in Database with Real-time Updates
+
+# Plan: Use EmailJS for Emails + External Supabase for Storage
 
 ## Overview
-Create a reliable system to capture all contact form submissions in a Supabase database table, with real-time capabilities so you can see new submissions instantly. The email notification will still be attempted, but the database becomes the primary source of truth.
+Replace the Resend email system with EmailJS (client-side) while keeping database storage in your external Supabase project. This simplifies the email setup since EmailJS works directly from the browser.
 
-## Benefits
-- **Never lose a submission** - All form data saved to database regardless of email delivery
-- **Real-time notifications** - See new submissions instantly without refreshing
-- **Searchable history** - Browse, filter, and export all past submissions
-- **Backup system** - Email still sent as secondary notification
+## Architecture
 
-## Technical Implementation
+```text
+┌─────────────────┐     ┌─────────────────┐
+│  Contact Form   │────▶│    EmailJS      │ (direct from browser)
+│   (Frontend)    │     │   (email sent)  │
+└────────┬────────┘     └─────────────────┘
+         │
+         ▼
+┌─────────────────┐     ┌─────────────────┐
+│  Edge Function  │────▶│ External        │
+│  (submit-contact)│     │ Supabase DB     │
+└─────────────────┘     └─────────────────┘
+```
 
-### 1. Create Database Table
-Create a `contact_submissions` table with fields for:
-- Name, email, phone
-- Service interest
-- Full address (street, city, state, ZIP)
-- Message
-- Timestamp
-- Status tracking (new, contacted, resolved)
+## What You Need to Provide
 
-### 2. Update Edge Function
-Modify `submit-contact` to:
-- Save submission to database first (guaranteed storage)
-- Then attempt to send email notification (best effort)
-- Return success even if email fails (since data is saved)
+Before implementation, you'll need to set up EmailJS:
 
-### 3. Enable Real-time
-- Enable Supabase Realtime on the table
-- This allows building a dashboard later to see submissions live
+1. **Sign up** at [emailjs.com](https://www.emailjs.com/) (free tier: 200 emails/month)
+2. **Create an Email Service** - Connect your Gmail/Outlook/etc
+3. **Create an Email Template** with these variables:
+   - `{{from_name}}` - Sender name
+   - `{{from_email}}` - Sender email
+   - `{{phone}}` - Phone number
+   - `{{service_interest}}` - Selected service
+   - `{{address}}` - Full address
+   - `{{message}}` - Message content
+4. **Get your credentials**:
+   - **Service ID** (e.g., `service_xxxxxx`)
+   - **Template ID** (e.g., `template_xxxxxx`)
+   - **Public Key** (e.g., `xxxxxxxxxxxxxxx`)
 
-### 4. Update Contact Form
-- Form continues working as-is
-- Edge function handles the dual storage + email approach
+## Implementation Steps
+
+### 1. Install EmailJS Package
+Add `@emailjs/browser` dependency to the project.
+
+### 2. Update Contact Form Component
+Modify `src/pages/Contact.tsx` to:
+- Import and initialize EmailJS
+- Send email directly from browser on form submit
+- Still call edge function for database storage
+- Handle both operations with proper error handling
+
+### 3. Simplify Edge Function
+Update `supabase/functions/submit-contact/index.ts` to:
+- Remove all Resend email code
+- Keep only the database insert to external Supabase
+- Simpler, faster execution
+
+### 4. Store EmailJS Credentials
+Since EmailJS public key is meant to be public (it's in your browser code anyway), we'll store the credentials as environment variables:
+- `VITE_EMAILJS_SERVICE_ID`
+- `VITE_EMAILJS_TEMPLATE_ID`
+- `VITE_EMAILJS_PUBLIC_KEY`
 
 ## Files to Change
-- **New SQL Migration**: Create `contact_submissions` table with RLS policies
-- **Edit**: `supabase/functions/submit-contact/index.ts` - Add database insert before email
 
-## Database Schema
-```
-contact_submissions
-├── id (UUID, primary key)
-├── name (text)
-├── email (text)
-├── phone (text)
-├── service_interest (text)
-├── address (text)
-├── city (text)
-├── state (text)
-├── zip_code (text)
-├── message (text)
-├── status (text, default: 'new')
-├── created_at (timestamp)
-```
+| File | Change |
+|------|--------|
+| `package.json` | Add `@emailjs/browser` dependency |
+| `src/pages/Contact.tsx` | Add EmailJS sending + keep edge function call |
+| `supabase/functions/submit-contact/index.ts` | Remove Resend code, keep DB insert only |
 
-## Security
-- RLS policy allowing public inserts (for form submissions)
-- RLS policy restricting reads to authenticated users only (for admin access later)
+## Benefits
+- **No email backend needed** - EmailJS handles delivery directly
+- **Free tier** - 200 emails/month on EmailJS free plan
+- **Simpler debugging** - Email issues separate from database issues
+- **Database backup** - All submissions still saved to your Supabase
+
+## Next Steps After Approval
+Once you approve, I'll need you to:
+1. Create your EmailJS account and template
+2. Provide the Service ID, Template ID, and Public Key
+
