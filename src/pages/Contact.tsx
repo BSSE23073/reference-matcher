@@ -67,6 +67,13 @@ const Contact = () => {
       .join(", ");
 
     try {
+      // Debug: log EmailJS config
+      console.log("EmailJS Config:", {
+        serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY ? "SET" : "MISSING"
+      });
+
       // Send email via EmailJS (client-side)
       const emailPromise = emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
@@ -105,8 +112,10 @@ const Contact = () => {
       }
 
       // Log any partial failures for debugging
-      if (!emailSuccess) console.warn("Email failed:", emailResult);
-      if (!dbSuccess) console.warn("Database save failed:", dbResult);
+      if (!emailSuccess) console.error("EmailJS failed:", emailResult);
+      if (!dbSuccess) console.error("Database save failed:", dbResult);
+      if (emailSuccess) console.log("EmailJS succeeded:", emailResult);
+      if (dbSuccess) console.log("Database save succeeded:", dbResult);
 
     } catch (error) {
       console.error("Error submitting form:", error);
