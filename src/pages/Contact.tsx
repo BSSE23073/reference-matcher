@@ -81,10 +81,12 @@ const Contact = () => {
         {
           from_name: formData.name,
           from_email: formData.email,
+          email: formData.email, // Also needed for Reply-To field
           phone: formData.phone,
           service_interest: formData.serviceInterest || "Not specified",
           address: fullAddress || "Not provided",
           message: formData.message || "No additional message",
+          title: formData.serviceInterest || "General Inquiry", // For subject line
         },
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
